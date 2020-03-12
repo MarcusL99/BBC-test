@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Header go here-->
+    <header>
+       <title>BBC</title>
+       <link rel="stylesheet" type="text/css" href="CssBBC.css">
+    </header>
+	
+    <!-- webpage logo-->
+	<h1><img src="bbcNews.png" width="30" height="30px">Welcome to the BBC</h1>  
+    
+	<!--Navigation bar-->
+        <div id="navbar">                                                                    
+        <a href="BBCHome.html" class="cate"><button height="13" width="13">Home</button></a>
+        <div class="dropdown">
+		<a href="BBCArticle.html" class="cate"><button height="13" width="13">Articles</button></a>
+		<div class="dropdown-content">                                                     <!--dropdown menu-->
+        <a href="" class="cate">Article 1</a>
+        <a href="" class="cate">Article 2</a>
+        <a href="" class="cate">Article 3</a>
+        <a href="" class="cate">Article 4</a>
+        <a href="" class="cate">Article 5</a>
+		</div>
+		</div>
+		</div>
+    <!-- Body go here-->
+	<body>
+	<center>
+	<h2>HOME</h2>
+	<div class="para">
+    <dl id="cat1">
+	<dt><h3>Introduction</h3></dt>                                    <!--Introduction--> 
+    <dl>
+	<dd>The British Broadcasting Corporation (BBC) is a British public service broadcaster. Its headquarters are at Broadcasting House in Westminster, London. It is the world's oldest national broadcaster, and the largest broadcaster in the world by number of employees.It employs over 22,000 staff in total, more than 16,000 of whom are in public sector broadcasting.</dd>
+	</div>
+	<!-- Footor go here-->
+	<footer>
+    <p>Hou In Lei</p> 
+    <p>Contact information:<a href="leihouin999@gmail.com">leihouin999@gmail.com</a>.</p>	
+    </footer>
+    </body>
+
+<script>
+<!-- scrolling function -->
+window.onscroll = function() {stickyFunction()};                                            
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+<!-- sticky navigation bar function -->
+function stickyFunction() {                                                                
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+
+<!-- anchor function -->
+function topFunction() {                                                                  
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0; 
+ }
+ 
+<!-- read json file function --> 
+function readArticle(articleFile){ <!-- check the parameter of which article has been selected -->
+var request=new XMLHttpRequest();
+var type;
+request.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var selectedArt = JSON.parse(this.responseText);
+    document.title = selectedArt.title;
+for (i in selected.body){           <!-- loop each item in the body of the selected json file -->
+	type=selectedArt.body[i];
+	if (type="heading"){            <!-- check if the item is heading -->
+	var heading=document.createElement("h3");
+	heading.innerHTML=selectedArt.body[i].model.text;
+	document.getElementById("para").appendChild(heading);
+	}else if (type="paragragh"){   <!-- check if the item is paragraph -->
+	var paragragh=document.createElement("p");
+	paragragh.innerHTML=selectedArt.body[i].model.text;
+	document.getElementById("para").appendChild(paragragh);
+	}else if (type="image"){        <!-- check if the item is image -->
+    var image=document.createElement("img");
+	image.setAttribute("src", selectedArt.body[i].model.url);
+    image.setAttribute("alt", selectedArt.body[i].model.altText);
+    image.setAttribute("height", selectedArt.body[i].model.height);
+    image.setAttribute("width", selectedArt.body[i].model.width);
+	document.getElementById("para").appendChild(image);
+	}else{                          <!-- check if the item is a unordered list -->
+	var UL=document.createElement("ul");
+	UL.setAttribute("id","artList");
+	document.getElementById("para").appendChild(UL);
+	var LI=document.createElement("li");
+	for(j in selectedArt.body[i].model.items){
+	var item=document.createTextNode(selectedArt.body[i].model.items[j]);
+	}
+	}
+	}
+  }
+};
+xmlhttp.open("GET", articleFile, true);
+xmlhttp.send();  
+}
+</script>
+<!--anchor button-->
+<div>
+<button class="arrow">
+<img src="arrowUp.jpg" height="25" width="25" href="#top" onclick="topFunction()">         
+<div class="centerBot">TOP</div></img>
+</button>
+</div>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Header go here-->
+    <header>
+       <title>BBC</title>
+       <link rel="stylesheet" type="text/css" href="CssBBC.css">
+    </header>
+	
+    <!-- webpage logo-->
+	<h1><img src="bbcNews.png" width="30" height="30px">Welcome to the BBC</h1>  
+    
+	<!--Navigation bar-->
+        <div id="navbar">                                                                    
+        <a href="BBCHome.html" class="cate"><button height="13" width="13">Home</button></a>
+        <div class="dropdown">
+		<a href="BBCArticle.html" class="cate"><button height="13" width="13">Articles</button></a>
+		<div class="dropdown-content">                                                     <!--dropdown menu-->
+        <a href="BBCArticle.html" class="cate" onclick="readArticle('article1.json')">Article 1</a>
+        <a href="BBCArticle.html" class="cate" onclick="readArticle('article2.json')">Article 2</a>
+        <a href="BBCArticle.html" class="cate" onclick="readArticle('article3.json')">Article 3</a>
+        <a href="BBCArticle.html" class="cate" onclick="readArticle('article4.json')">Article 4</a>
+        <a href="BBCArticle.html" class="cate" onclick="readArticle('article5.json')">Article 5</a>
+		</div>
+		</div>
+		</div>
+    <!-- Body go here-->
+	<body>
+	<center>
+	<h2>Article</h2>
+	<div class="para">
+    <dl id="cat1">
+	<dt><h3></h3></dt>                                    <!--Introduction--> 
+    <dl>
+	<dd></dd>
+	</div>
+	<!-- Ranking tool for each article-->
+	<form>
+    <fieldset>
+    <legend>Leave Your Comment For This Article Here:</legend>                                       <!--comment field-->
+		<p>
+	    <label for="comment">Comments: </label>
+		</p>
+		<p>
+	    <textarea id="comment" name="comment" rows="5" cols="50">
+	    </textarea>
+		</p>
+        <p>
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name" placeholder="name"><br>
+		</p>
+		<p>
+		<label for="email">Email:</label>
+		<input type="email" name="email" id="email" placeholder="Email Address"><br>
+		</p>
+		<label for="type of student"> How do you find this website :</label>
+        <input type="radio" name="rate" id="VG" value="Very Good" >Very good</input>
+        <input type="radio" name="rate" id="G" value="Good">Good</input>
+		<input type="radio" name="rate" id="N" value="Normal">Normal</input>
+		<input type="radio" name="rate" id="B" value="Bad">Bad</input>
+		<input type="radio" name="rate" id="VB" value="Very Bad">Very Bad</input>
+		<p>
+		<input type="submit" name="submit" value="Submit" onclick="checkForm(form)">    <!--call the function to check every input-->
+        </p>		
+    </fieldset>
+    </form>
+	<!-- Footor go here-->
+	<footer>
+    <p>Hou In Lei</p> 
+    <p>Contact information:<a href="leihouin999@gmail.com">leihouin999@gmail.com</a>.</p>	
+    </footer>
+    </body>
+
+<script>
+<!-- scrolling function -->
+window.onscroll = function() {stickyFunction()};                                            
+var navbar = document.getElementById("navbar");
+var sticky = navbar.offsetTop;
+
+<!-- sticky navigation bar function -->
+function stickyFunction() {                                                                
+  if (window.pageYOffset >= sticky) {
+    navbar.classList.add("sticky")
+  } else {
+    navbar.classList.remove("sticky");
+  }
+}
+
+<!-- anchor function -->
+function topFunction() {                                                                  
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0; 
+ }
+ 
+<!-- read json file function --> 
+function readArticle(articleFile){ <!-- check the parameter of which article has been selected -->
+var request=new XMLHttpRequest();
+var type;
+request.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var selectedArt = JSON.parse(this.responseText);
+    document.title = selectedArt.title;
+for (i in selected.body){           <!-- loop each item in the body of the selected json file -->
+	type=selectedArt.body[i];
+	if (type="heading"){            <!-- check if the item is heading -->
+	var heading=document.createElement("h3");
+	heading.innerHTML=selectedArt.body[i].model.text;
+	document.getElementById("para").appendChild(heading);
+	}else if (type="paragragh"){   <!-- check if the item is paragraph -->
+	var paragragh=document.createElement("p");
+	paragragh.innerHTML=selectedArt.body[i].model.text;
+	document.getElementById("para").appendChild(paragragh);
+	}else if (type="image"){        <!-- check if the item is image -->
+    var image=document.createElement("img");
+	image.setAttribute("src", selectedArt.body[i].model.url);
+    image.setAttribute("alt", selectedArt.body[i].model.altText);
+    image.setAttribute("height", selectedArt.body[i].model.height);
+    image.setAttribute("width", selectedArt.body[i].model.width);
+	document.getElementById("para").appendChild(image);
+	}else{                          <!-- check if the item is a unordered list -->
+	var UL=document.createElement("ul");
+	UL.setAttribute("id","artList");
+	document.getElementById("para").appendChild(UL);
+	var LI=document.createElement("li");
+	for(j in selectedArt.body[i].model.items){
+	var item=document.createTextNode(selectedArt.body[i].model.items[j]);
+	}
+	}
+	}
+  }
+};
+xmlhttp.open("GET", articleFile, true);
+xmlhttp.send();  
+}
+
+<!--check function from the form-->
+function checkForm(form) {                                                                 
+    var valid=true;
+    var rate = document.forms[0];
+    var rateValue=getRadioValue(rate);
+	var name=document.getElementById("name").value;
+	var comment=document.getElementById("comment").value;
+     if (form.name.value == ""){
+	 alert("Please Enter your name.");
+	 vaild=false;}
+	 if (form.email.value == ""){
+	 alert("Please Enter your email.");
+	 valid=false;}
+	 if (rateValue==0){
+	 alert("Please rate this website.");
+	 valid=false;}
+	if(valid){
+	alert("Dear "+name+" Thank you very much for your feedback. You have rated our site as "+rateValue+" and your comment was "+comment+".");	
+    }
+}
+
+<!--return the radio button value from the form-->
+function getRadioValue( radioArray ) {                                                    
+   var i;
+   for ( i = 0; i < radioArray.length; i++ ) {
+      if ( radioArray[ i ].checked ) { 
+         return radioArray[ i ].value;
+      }
+   }
+   return "";
+}
+</script>
+<!--anchor button-->
+<div>
+<button class="arrow">
+<img src="arrowUp.jpg" height="25" width="25" href="#top" onclick="topFunction()">         
+<div class="centerBot">TOP</div></img>
+</button>
+</div>
+
+</html>

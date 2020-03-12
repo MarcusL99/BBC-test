@@ -1,0 +1,166 @@
+h1{
+	color:#f2f2f2;
+	font-family:"Arial Black", Gadget, sans-serif;
+	overflow: hidden;
+	position:relative;
+	margin:0;
+}
+
+h2{
+	font-family:"Arial Black", Gadget, sans-serif;
+	padding-left:20px;
+}
+
+.cate{
+  color: black;
+  text-decoration: none;
+}
+
+.cate:hover button:before{
+   cursor: pointer;
+}
+
+.cate:hover {
+   background-color: grey;
+}
+
+.cate:active {
+  background-color: #c3c6cc;
+}
+
+.cate button{
+  background-color: #f2f2f2;
+  border: none;
+  padding: 10px;
+  width:98px;
+  text-align: center;
+  text-decoration: none;
+  font-size:12px;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family:"Arial Black", Gadget, sans-serif;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: black;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #5B5B5B;
+  min-width: 160x;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: inline-block;
+  width: 80px;
+  left: 120px;
+  top:101px;
+}
+
+#navbar{
+   overflow: auto;
+    background-color:#333333;
+
+}
+
+#navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.arrow{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  text-align: center-left;
+  background:rgba(255,255,255,0);
+  border:0px;
+    border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-family:"Arial Black", Gadget, sans-serif;
+}
+
+.centerBot{
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color:white;
+  font-size:10px;
+}
+
+.content {
+	height: 100%;
+    overflow: auto;
+    padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+
+
+body {
+	color: #f2f2f2;
+	background-color: #33cc33;
+	margin:0px;
+	text-align:center;
+	height:100%;
+}
+
+.para{
+	text-align:center;
+}
+
+#cat1{
+    color:#f2f2f2;
+	background-color:#42b9f5;
+	margin:0px 20px 20px 20px;
+	border:3px;
+	border-style: solid;
+	border-color:#4275f5;
+}
+
+dd{
+	text-align:left;
+}
+
+form{
+	text-align:left;
+	margin: 0px 50px 50px 50px;
+	padding:10px;
+	background-color:#EDD382;
+    color:#B33609;
+	width:800px;
+	height:100%;
+}
+
+
+	
+
+
+
